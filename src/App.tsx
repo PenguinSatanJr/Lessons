@@ -2,29 +2,30 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-// import { useWeatherForecastQuery } from "./queries";
+import { useWeatherForecastQuery } from "./queries";
 
+const API_KEY = '39612356bfcb87e2061a89eb187b5f9c';
 
-// const lat = '40.8141';
+const lat = '40.8141';
 
-// const lon = "14.3391";
+const lon = "14.3391";
 
-// const units = 'metric';
+const units = 'metric';
 
 
 const App = () => {
   const [count, setCount] = useState(0);
 
-  // const params = {
-  //   lat,
-  //   lon,
-  //   units,
-  //   appid: API_KEY
-  // };
+  const params = {
+    lat,
+    lon,
+    units,
+    appid: API_KEY
+  };
 
-  // const weatherQuery = useWeatherForecastQuery(params);
+  const weatherQuery = useWeatherForecastQuery(params);
 
-  // console.log(weatherQuery.data);
+  console.log(weatherQuery.data);
 
   return (
     <>
