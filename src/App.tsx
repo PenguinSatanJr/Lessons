@@ -6,9 +6,9 @@ import { useWeatherForecastQuery } from "./queries";
 
 const API_KEY = '6a18b1317bbd8db3f782b585670f8a4a';
 
-const lat = '0.1276';
+const lat = '51.5072';
 
-const lon = "51.5072";
+const lon = "0.1276";
 
 const units = 'metric';
 
