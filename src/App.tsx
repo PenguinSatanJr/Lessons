@@ -1,55 +1,64 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-// import { useWeatherForecastQuery } from "./queries";
+import PetsIcon from '@mui/icons-material/Pets';
+import { Container, IconButton, List, Stack, TextField } from '@mui/material';
+import { useState } from 'react';
+import ListItem from './list-item';
 
+// type WeatherQueryParam = {
+//   API_KEY: string;
+//   lat: string;
+//   lon: string;
+//   units: string;
+// };
 
-// const lat = '40.8141';
+// const queryParams: WeatherQueryParam = {
+//   API_KEY: "39612356bfcb87e2061a89eb187b5f9c",
+//   lat: "40.8141",
+//   lon: "14.3391",
+//   units: "metric",
+// };
 
-// const lon = "14.3391";
+// type Person = {
+//   name: string;
+//   surname: string;
+//   age: number;
+// };
 
-// const units = 'metric';
+// const ivan = {
+//   name: "Ivan",
+//   surname: "Garbuz",
+//   age: 32,
+// };
+
+// const ivanFavoriteNumbers = [7, 3, 12, 666, 1488];
+
+// const greetingWithFavoriteNumbers = (person: Person, numbers: number[]) =>
+//   `Hello my name is ${person.name} ${person.surname}, I am ${person.age} years old. My favorite numbers is ${numbers}`;
 
 
 const App = () => {
-  const [count, setCount] = useState(0);
+  const [input, setInput] = useState('');
 
-  // const params = {
-  //   lat,
-  //   lon,
-  //   units,
-  //   appid: API_KEY
-  // };
-
-  // const weatherQuery = useWeatherForecastQuery(params);
-
-  // console.log(weatherQuery.data);
+  const [items, setItems] = useState<string[]>([]);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Container maxWidth={'sm'} disableGutters>
+      <Stack direction={'row'} sx={{ paddingTop: '150px' }} justifyContent={'center'}>
+        <TextField
+          label={'Enter some items to buy'}
+          fullWidth
+          onChange={({ target: { value } }) => setInput(value)
+          }
+          value={input}
+        />
+        <IconButton sx={{ color: 'purple', width: "150px" }} onClick={() =>
+          input.trim().length && setItems([...items, input.trim()])}>
+          <PetsIcon fontSize='large' />
+        </IconButton>
+      </Stack>
+      <List>
+        {items.map((value, index) => (<ListItem item={value} key={index} />))}
+      </List>
+    </Container>
   );
 };
-
 export default App;
