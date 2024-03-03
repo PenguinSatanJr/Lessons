@@ -40,6 +40,8 @@ const App = () => {
 
   const [items, setItems] = useState<string[]>([]);
 
+  console.log('items', items);
+
   return (
     <Container maxWidth={'sm'} disableGutters>
       <Stack direction={'row'} sx={{ paddingTop: '150px' }} justifyContent={'center'}>
