@@ -2,24 +2,31 @@ import { Checkbox, Typography, IconButton, ListItem as MuiListItem } from "@mui/
 import EditIcon from '@mui/icons-material/Edit';
 import ClearIcon from '@mui/icons-material/Clear';
 
-type ListItemProps = {
-    item: string;
+export type Item = {
+    id: number;
+    title: string;
 };
 
-const ListItem = ({ item }: ListItemProps) =>
-    <MuiListItem divider >
+type ListItemProps = {
+    item: Item;
+    onDelete: (id: number) => void;
+};
+
+const ListItem = ({ item, onDelete }: ListItemProps) => {
+    const { id, title } = item;
+
+    return <MuiListItem divider >
         <Checkbox />
         <Typography>
-            {item}
+            {title}
         </Typography>
         <IconButton >
             <EditIcon fontSize={'small'} />
         </IconButton>
-        <IconButton >
+        <IconButton onClick={() => onDelete(id)} >
             <ClearIcon fontSize={'small'} />
         </IconButton>
     </MuiListItem>;
-
-
+}
 
 export default ListItem;
