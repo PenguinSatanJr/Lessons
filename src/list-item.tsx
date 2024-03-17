@@ -1,4 +1,4 @@
-import { Checkbox, Typography, IconButton, ListItem as MuiListItem } from "@mui/material"
+import { Typography, IconButton, ListItem as MuiListItem, Stack } from "@mui/material"
 import EditIcon from '@mui/icons-material/Edit';
 import ClearIcon from '@mui/icons-material/Clear';
 
@@ -15,18 +15,24 @@ type ListItemProps = {
 const ListItem = ({ item, onDelete }: ListItemProps) => {
     const { id, title } = item;
 
-    return <MuiListItem divider >
-        <Checkbox />
-        <Typography>
-            {title}
-        </Typography>
-        <IconButton >
-            <EditIcon fontSize={'small'} />
-        </IconButton>
-        <IconButton onClick={() => onDelete(id)} >
-            <ClearIcon fontSize={'small'} />
-        </IconButton>
-    </MuiListItem>;
+    return (
+        <MuiListItem divider >
+            <Stack direction={'row'} width={'100%'} justifyContent={'space-between'}>
+                <Typography variant='h6'>{id}</Typography>
+                <Typography>
+                    {title}
+                </Typography>
+                <Stack direction={'row'}>
+                    <IconButton >
+                        <EditIcon fontSize={'small'} />
+                    </IconButton>
+                    <IconButton onClick={() => onDelete(id)} >
+                        <ClearIcon fontSize={'small'} />
+                    </IconButton>
+                </Stack>
+            </Stack>
+        </MuiListItem>
+    );
 }
 
 export default ListItem;

@@ -63,10 +63,15 @@ const App = () => {
           onChange={({ target: { value } }) => setInput(value)
           }
           value={input}
+          InputProps={{
+            endAdornment: (
+              <IconButton sx={{ color: 'purple' }} onClick={onAddItem}>
+                <PetsIcon fontSize='large' />
+              </IconButton>
+            )
+          }}
         />
-        <IconButton sx={{ color: 'purple', width: "150px" }} onClick={onAddItem}>
-          <PetsIcon fontSize='large' />
-        </IconButton>
+
       </Stack>
       <List>
         {items.map((value) => (<ListItem item={value} key={value.id} onDelete={() => onItemDelete(value.id)} />))}
