@@ -43,11 +43,12 @@ const App = () => {
   const [items, setItems] = useState<Item[]>([]);
 
   const onAddItem = () => {
-    input.trim().length && setItems([...items, { id: id, title: input.trim() }]);
-    setId(id + 1);
+    if (input.trim().length) {
+      setItems([...items, { id, title: input.trim() }]);
+      setId(id + 1);
+      setInput('');
+    }
   };
-
-  console.log(id);
 
   const onItemDelete = (id: number) => {
     setItems(items.filter((item) => item.id !== id));
