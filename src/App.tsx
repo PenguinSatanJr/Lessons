@@ -1,7 +1,7 @@
 import PetsIcon from '@mui/icons-material/Pets';
 import { Container, IconButton, List, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
-import ListItem from './list-item';
+import ListItem, { Item } from './list-item';
 
 // type WeatherQueryParam = {
 //   API_KEY: string;
@@ -38,7 +38,21 @@ import ListItem from './list-item';
 const App = () => {
   const [input, setInput] = useState('');
 
-  const [items, setItems] = useState<string[]>([]);
+  const [id, setId] = useState(1);
+
+  const [items, setItems] = useState<Item[]>([]);
+
+  const onAddItem = () => {
+    if (input.trim().length) {
+      setItems([...items, { id, title: input.trim() }]);
+      setId(id + 1);
+      setInput('');
+    }
+  };
+
+  const onItemDelete = (id: number) => {
+    setItems(items.filter((item) => item.id !== id));
+  };
 
   return (
     <Container maxWidth={'sm'} disableGutters>
@@ -50,13 +64,12 @@ const App = () => {
           }
           value={input}
         />
-        <IconButton sx={{ color: 'purple', width: "150px" }} onClick={() =>
-          input.trim().length && setItems([...items, input.trim()])}>
+        <IconButton sx={{ color: 'purple', width: "150px" }} onClick={onAddItem}>
           <PetsIcon fontSize='large' />
         </IconButton>
       </Stack>
       <List>
-        {items.map((value, index) => (<ListItem item={value} key={index} />))}
+        {items.map((value) => (<ListItem item={value} key={value.id} onDelete={() => onItemDelete(value.id)} />))}
       </List>
     </Container>
   );
