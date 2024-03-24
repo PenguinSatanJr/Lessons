@@ -9,16 +9,17 @@ export type Item = {
 
 type ListItemProps = {
     item: Item;
+    sequenceNumber: number;
     onDelete: (id: number) => void;
 };
 
-const ListItem = ({ item, onDelete }: ListItemProps) => {
+const ListItem = ({ item, sequenceNumber, onDelete }: ListItemProps) => {
     const { id, title } = item;
 
     return (
         <MuiListItem divider >
             <Stack direction={'row'} width={'100%'} justifyContent={'space-between'}>
-                <Typography variant='h6'>{id}</Typography>
+                <Typography variant='h6'>{sequenceNumber}</Typography>
                 <Typography>
                     {title}
                 </Typography>

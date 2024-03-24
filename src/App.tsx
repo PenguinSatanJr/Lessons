@@ -1,4 +1,5 @@
 import PetsIcon from '@mui/icons-material/Pets';
+import EditIcon from '@mui/icons-material/Edit';
 import { Container, IconButton, List, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
 import ListItem, { Item } from './list-item';
@@ -42,6 +43,8 @@ const App = () => {
 
   const [items, setItems] = useState<Item[]>([]);
 
+  const [isEditing, setIsEditing] = useState(false);
+
   const onAddItem = () => {
     if (input.trim().length) {
       setItems([...items, { id, title: input.trim() }]);
@@ -65,16 +68,27 @@ const App = () => {
           value={input}
           InputProps={{
             endAdornment: (
-              <IconButton sx={{ color: 'purple' }} onClick={onAddItem}>
-                <PetsIcon fontSize='large' />
-              </IconButton>
+              <Stack direction={'row'}>
+                <IconButton sx={{ color: 'green' }} onClick={() => setIsEditing(!isEditing)}>
+                  <EditIcon fontSize='large' />
+                </IconButton>
+                {!isEditing && <IconButton sx={{ color: 'purple' }} onClick={onAddItem}>
+                  <PetsIcon fontSize='large' />
+                </IconButton>}
+              </Stack>
             )
           }}
         />
 
       </Stack>
       <List>
-        {items.map((value) => (<ListItem item={value} key={value.id} onDelete={() => onItemDelete(value.id)} />))}
+        {items.map((value, index) => (
+          <ListItem
+            key={value.id}
+            item={value}
+            sequenceNumber={index + 1}
+            onDelete={() => onItemDelete(value.id)}
+          />))}
       </List>
     </Container>
   );
